@@ -9,9 +9,6 @@ Nossa stack para microserviços é a seguinte:
 - Nest.js
 - Jest
 
-Sugerimos que tente utilizar o mais próximo disso, mas sinta-se à vontade para utilizar o que te deixar mais confortável
-e que consiga demonstrar o seu melhor.
-
 ### Observações
 
 Esta é uma avaliação básica de código.
@@ -38,7 +35,7 @@ Com a seguinte representação de um conteúdo:
   "provider_id": "STKCRSUsyP0",
   "expires_at": 1580428851394,
   "watched": false,
-  "expired": false,
+  "expired": false
 }
 ```
 
@@ -71,6 +68,6 @@ Crie endpoints para as seguintes ações:
 ### Dicas
 
 - Os conteúdos podem ficar em memória, não é necessário persistir os dados
-- Sinta-se a vontade para fazer o código em JS
+- Utilize Nestjs com TypeScript
 - Caso tenha alguma dúvida, tome uma decisão e explique no PR
 - Testes são sempre bem-vindos :smiley:
