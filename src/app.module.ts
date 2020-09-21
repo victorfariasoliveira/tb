@@ -1,8 +1,6 @@
 import { Module } from '@nestjs/common'
-
+import { MediaModule } from './components/media/media.module'
 @Module({
-  imports: [],
-  controllers: [],
-  providers: [],
+  imports: [MediaModule],
 })
 export class AppModule {}
