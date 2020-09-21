@@ -24,8 +24,8 @@ export class MediaService {
       idInt = parseInt(id)
     }
 
-    const cat = this.medias.find(m => m.id === idInt)
-    return Object.assign(cat, data)
+    const media = this.medias.find(m => m.id === idInt)
+    return Object.assign(media, data)
   }
 
   delete(media: Media): void {
