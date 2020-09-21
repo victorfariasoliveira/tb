@@ -7,7 +7,7 @@ export class MediaService {
 
   create(media: Media): Media {
     this.medias.push(media)
-    return media
+    return this.medias.find(m => m.id == media.id)
   }
 
   findAll(): Media[] {
@@ -18,7 +18,7 @@ export class MediaService {
     return this.medias.find(m => m.id == id)
   }
 
-  update(data: any, id: string): Media {
+  update(data: Media, id: string): Media {
     let idInt
     if (parseInt(id) !== NaN || parseInt(id) !== undefined) {
       idInt = parseInt(id)
