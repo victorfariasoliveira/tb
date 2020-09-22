@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Put, Delete, Param } from '@nestjs/common'
 import { Media } from '../interfaces/media.interface'
-import { PostMediaValidator, PutMediaValidator } from '../validator/media.validator'
+import { PostMediaValidator, PutMediaValidator } from '../validators/media.validator'
 import { MediaService } from '../services/media.service'
 
 @Controller('media')

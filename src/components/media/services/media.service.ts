@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { Media } from '../interfaces/media.interface'
-import { PostMediaValidator, PutMediaValidator } from '../validator/media.validator'
+import { PostMediaValidator, PutMediaValidator } from '../validators/media.validator'
 
 @Injectable()
 export class MediaService {
