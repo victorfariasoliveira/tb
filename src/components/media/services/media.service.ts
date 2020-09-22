@@ -1,14 +1,19 @@
-import { Injectable } from '@nestjs/common'
+import { BadRequestException, Injectable } from '@nestjs/common'
 import { Media } from '../interfaces/media.interface'
 import { PostMediaValidator, PutMediaValidator } from '../validators/media.validator'
+import CONSTANTS from '../constants/media.constants'
 
 @Injectable()
 export class MediaService {
   private readonly medias: Media[] = []
 
   create(media: PostMediaValidator): Media {
-    this.medias.push(media)
-    return this.medias.find(m => m.id == media.id)
+    try {
+      this.medias.push(media)
+      return this.medias.find(m => m.id == media.id)
+    } catch (error) {
+      throw new BadRequestException(CONSTANTS.badRequestCreate.message)
+    }
   }
 
   findAll(): Media[] {
@@ -16,19 +21,25 @@ export class MediaService {
   }
 
   findOne(id: number): Media {
-    return this.medias.find(m => m.id == id)
+    const media = this.medias.find(m => m.id == id)
+    if (media === undefined) throw new BadRequestException(CONSTANTS.badRequestGet.message)
+    return media
   }
 
   update(data: PutMediaValidator, id: string): Media {
-    let idInt
-    if (parseInt(id) !== NaN || parseInt(id) !== undefined) {
-      idInt = parseInt(id)
+    try {
+      const media = this.medias.find(m => m.id === parseInt(id))
+      return Object.assign(media, data)
+    } catch (error) {
+      throw new BadRequestException(CONSTANTS.badRequestUpdate.message)
     }
-    const media = this.medias.find(m => m.id === idInt)
-    return Object.assign(media, data)
   }
 
   delete(media: Media): void {
-    this.medias.splice(media.id, 1)
+    try {
+      this.medias.splice(media.id, 1)
+    } catch (error) {
+      throw new BadRequestException(CONSTANTS.badRequestDelete.message)
+    }
   }
 }
