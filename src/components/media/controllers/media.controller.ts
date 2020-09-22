@@ -8,8 +8,12 @@ export class MediaController {
   constructor(private readonly mediaService: MediaService) {}
 
   @Post()
-  async createOne(@Body() createMedia: PostMediaValidator): Promise<Media> {
-    return this.mediaService.create(createMedia)
+  async createOne(
+    @Body()
+    { id, name, media_type, provider_id, expires_at, duration, provider }: PostMediaValidator,
+  ): Promise<Media> {
+    const data = { id, name, media_type, provider_id, expires_at, duration, provider }
+    return this.mediaService.create(data)
   }
 
   @Get('all')
@@ -18,13 +22,17 @@ export class MediaController {
   }
 
   @Get(':id')
-  async findOne(@Param() params): Promise<Media> {
-    return this.mediaService.findOne(params.id)
+  async findOne(@Param() { id }): Promise<Media> {
+    return this.mediaService.findOne(id)
   }
 
   @Put(':id')
-  async update(@Body() data: PutMediaValidator, @Param() params): Promise<Media> {
-    return this.mediaService.update(data, params.id)
+  async update(
+    @Body() { name, media_type, provider_id, expires_at, duration, provider }: PutMediaValidator,
+    @Param() { id },
+  ): Promise<Media> {
+    const data = { name, media_type, provider_id, expires_at, duration, provider }
+    return this.mediaService.update(data, id)
   }
 
   @Delete(':id')
