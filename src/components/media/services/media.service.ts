@@ -1,11 +1,12 @@
 import { Injectable } from '@nestjs/common'
 import { Media } from '../interfaces/media.interface'
+import { PostMediaValidator, PutMediaValidator } from '../validator/media.validator'
 
 @Injectable()
 export class MediaService {
   private readonly medias: Media[] = []
 
-  create(media: Media): Media {
+  create(media: PostMediaValidator): Media {
     this.medias.push(media)
     return this.medias.find(m => m.id == media.id)
   }
@@ -18,12 +19,11 @@ export class MediaService {
     return this.medias.find(m => m.id == id)
   }
 
-  update(data: Media, id: string): Media {
+  update(data: PutMediaValidator, id: string): Media {
     let idInt
     if (parseInt(id) !== NaN || parseInt(id) !== undefined) {
       idInt = parseInt(id)
     }
-
     const media = this.medias.find(m => m.id === idInt)
     return Object.assign(media, data)
   }

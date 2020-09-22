@@ -1,5 +1,6 @@
 import { Controller, Get, Post, Body, Put, Delete, Param } from '@nestjs/common'
 import { Media } from '../interfaces/media.interface'
+import { PostMediaValidator, PutMediaValidator } from '../validator/media.validator'
 import { MediaService } from '../services/media.service'
 
 @Controller('media')
@@ -7,7 +8,7 @@ export class MediaController {
   constructor(private readonly mediaService: MediaService) {}
 
   @Post()
-  async createOne(@Body() createMedia: Media): Promise<Media> {
+  async createOne(@Body() createMedia: PostMediaValidator): Promise<Media> {
     return this.mediaService.create(createMedia)
   }
 
@@ -22,7 +23,7 @@ export class MediaController {
   }
 
   @Put(':id')
-  async update(@Body() data: Media, @Param() params): Promise<Media> {
+  async update(@Body() data: PutMediaValidator, @Param() params): Promise<Media> {
     return this.mediaService.update(data, params.id)
   }
 
