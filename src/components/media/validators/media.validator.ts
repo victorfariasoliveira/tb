@@ -8,6 +8,7 @@ const MEDIA_VALUES = {
 }
 
 export class PostMediaValidator {
+  @IsNotEmpty()
   @IsInt()
   readonly id: number
 
@@ -33,9 +34,15 @@ export class PostMediaValidator {
 
   @IsInt()
   readonly expires_at: number
+
+  readonly watched?: boolean
+  readonly expired?: boolean
 }
 
 export class PutMediaValidator {
+  @IsInt()
+  readonly id: number
+
   @IsString()
   @Length(MEDIA_VALUES.name[0], MEDIA_VALUES.name[1])
   readonly name: string
