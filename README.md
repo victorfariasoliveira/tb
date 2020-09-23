@@ -1,3 +1,20 @@
+## Routes
+
+The api has some routes available, in this document you can find which routes are these and a brief example of how to use them.
+
+### Table of routes
+
+The application routes are listed in the table below:
+
+| Route               | Description                                   |
+| ------------------- | --------------------------------------------- |
+| `POST /media`       | This is a route to create a media             |
+| `GET /media/all`    | This is a route to obtain all available media |
+| `GET /media/:id`    | This is a route to get a media by id          |
+| `PUT /media/:id`    | This is a route to update a media             |
+| `DELETE /media/:id` | This is a route to delete a media             |
+
+<br />
 <h1 align="center">Teste Backend</h1>
 <h5 align="center">Nosso teste para conhecer como você codifica no dia-dia</h5>
 
