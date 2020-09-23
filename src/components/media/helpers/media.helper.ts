@@ -4,6 +4,10 @@ import { isValid } from 'date-fns'
 
 @Injectable()
 class MediaHelper {
+  isDate(date: number): boolean {
+    return isValid(date)
+  }
+
   mediaWithExpiredProperty(media: Media): Media {
     try {
       if (isValid(media.expires_at) && media.expires_at < Date.now()) {
