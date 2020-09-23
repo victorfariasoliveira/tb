@@ -1,40 +1,62 @@
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator'
+import { IsInt, IsNotEmpty, IsNumber, IsString, Length } from 'class-validator'
+
+const MEDIA_VALUES = {
+  name: [1, 80],
+  provider: [1, 10],
+  media_type: [1, 10],
+  provider_id: [1, 40],
+}
 
 export class PostMediaValidator {
-  @IsNumber()
+  @IsNotEmpty()
+  @IsInt()
   readonly id: number
 
   @IsNotEmpty()
   @IsString()
+  @Length(MEDIA_VALUES.name[0], MEDIA_VALUES.name[1])
   readonly name: string
 
   @IsString()
+  @Length(MEDIA_VALUES.provider[0], MEDIA_VALUES.provider[1])
   readonly provider: string
 
   @IsNotEmpty()
+  @Length(MEDIA_VALUES.media_type[0], MEDIA_VALUES.media_type[1])
   readonly media_type: string
 
   @IsString()
+  @Length(MEDIA_VALUES.provider_id[0], MEDIA_VALUES.provider_id[1])
   readonly provider_id: string
 
-  @IsNumber()
+  @IsInt()
   readonly duration: number
 
-  @IsNumber()
+  @IsInt()
   readonly expires_at: number
+
+  readonly watched?: boolean
+  readonly expired?: boolean
 }
 
 export class PutMediaValidator {
+  @IsInt()
+  readonly id: number
+
   @IsString()
+  @Length(MEDIA_VALUES.name[0], MEDIA_VALUES.name[1])
   readonly name: string
 
   @IsString()
+  @Length(MEDIA_VALUES.provider[0], MEDIA_VALUES.provider[1])
   readonly provider: string
 
   @IsString()
+  @Length(MEDIA_VALUES.media_type[0], MEDIA_VALUES.media_type[1])
   readonly media_type: string
 
   @IsString()
+  @Length(MEDIA_VALUES.provider_id[0], MEDIA_VALUES.provider_id[1])
   readonly provider_id: string
 
   @IsNumber()

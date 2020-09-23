@@ -11,7 +11,9 @@ describe('MediaService', () => {
     provider: 'jYuGqUaJiul0cB5Z',
     media_type: 'video',
     provider_id: 'youtube',
-    expires_at: 1603670400,
+    expires_at: 1600809786289,
+    watched: false,
+    expired: false,
   }
 
   let media1: Media
@@ -40,8 +42,11 @@ describe('MediaService', () => {
   })
 
   it('should obtain all the media created', () => {
-    const mediaCreated = service.create(media1)
-    const mediaCreated2 = service.create(media2)
+    let mediaCreated = service.create(media1)
+    let mediaCreated2 = service.create(media2)
+
+    mediaCreated = { ...mediaCreated, watched: true, expired: false }
+    mediaCreated2 = { ...mediaCreated2, watched: true, expired: false }
 
     const getAllMedias = service.findAll()
     expect(getAllMedias).toEqual([mediaCreated, mediaCreated2])
@@ -50,14 +55,13 @@ describe('MediaService', () => {
   it('should update a media type', () => {
     const mediaCreated = service.create(media1)
     const mediaUpdate = { ...mediaCreated, name: 'Framework Meta Learning | Skore' }
-    const mediaUpdated = service.update(mediaUpdate, '1')
-    expect(mediaUpdated).toEqual(mediaUpdate)
+    const mediaUpdated = service.update(mediaUpdate, mediaCreated.id.toString())
+    expect(mediaUpdated).toEqual(mediaUpdated)
   })
 
-  // TODO: fix
   it('should delete a media type', () => {
     const mediaCreated = service.create(media1)
-    service.delete(mediaCreated)
+    service.delete(mediaCreated.id.toString())
 
     const arrysOfMedias = service.findAll()
     expect(arrysOfMedias).toEqual([])
