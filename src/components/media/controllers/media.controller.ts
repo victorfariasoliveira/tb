@@ -28,11 +28,12 @@ export class MediaController {
 
   @Put(':id')
   async update(
-    @Body() { name, media_type, provider_id, expires_at, duration, provider }: PutMediaValidator,
-    @Param() { id },
+    @Body()
+    { id, name, media_type, provider_id, expires_at, duration, provider }: PutMediaValidator,
+    @Param() { id: paramId },
   ): Promise<Media> {
-    const data = { name, media_type, provider_id, expires_at, duration, provider }
-    return this.mediaService.update(data, id)
+    const data = { id, name, media_type, provider_id, expires_at, duration, provider }
+    return this.mediaService.update(data, paramId)
   }
 
   @Delete(':id')
